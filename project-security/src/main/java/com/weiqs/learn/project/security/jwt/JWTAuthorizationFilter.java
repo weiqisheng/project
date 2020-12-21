@@ -68,6 +68,7 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
         String resources  = JwtTokenUtils.getUserRole(token);
 
         String[] userResourceList = StringUtils.strip(resources,"[]").split(", ");
+        Arrays.stream(userResourceList).forEach(role -> System.out.println(role));
         Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
         Arrays.stream(userResourceList).forEach(resource -> authorities.add(new SimpleGrantedAuthority(resource)));
         if (StringUtils.isNoneBlank(userName)){

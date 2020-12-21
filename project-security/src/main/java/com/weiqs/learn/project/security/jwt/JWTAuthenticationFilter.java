@@ -73,7 +73,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         //创建token
         String token = JwtTokenUtils.createToken(user.getUsername(), authorities.toString());
         response.setHeader("token", JwtTokenUtils.TOKEN_PREFIX +token);
-        ResponseUtil.responseJson(response,200, token);
+        ResponseUtil.responseJson(response,200, JwtTokenUtils.TOKEN_PREFIX +token);
     }
 
     /**

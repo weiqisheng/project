@@ -71,11 +71,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // 测试用资源，需要验证了的用户才能访问
                 .antMatchers("/api/**")
                 .authenticated()
-                .antMatchers(HttpMethod.DELETE, "/api/**")
-                .hasRole("ADMIN")
+//                .antMatchers("/role/**")
+//                .hasRole("ADMIN")
                 // 其他都放行了
                 .anyRequest().permitAll()
                 .and()
+                //登录拦截器
                 .addFilter(new JWTAuthenticationFilter(authenticationManager()))
                 //添加jwt鉴权拦截器
                 .addFilter(new JWTAuthorizationFilter(authenticationManager()))
@@ -83,7 +84,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .exceptionHandling()
-                .authenticationEntryPoint(new JWTAuthenticationEntryPoint());
+                .authenticationEntryPoint(new JWTAuthenticationEntryPoint())
+                .accessDeniedHandler(new JwtAccessDeniedHandler());
 
     }
 //

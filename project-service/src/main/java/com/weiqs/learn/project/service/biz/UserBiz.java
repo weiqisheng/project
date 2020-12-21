@@ -33,7 +33,7 @@ public class UserBiz implements UserDetailsService {
         }
         String password = passwordEncoder.encode("123456");
         List<SimpleGrantedAuthority> authorities = new ArrayList<>();
-        authorities.add(new SimpleGrantedAuthority("ROLE"));
+        authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN1"));
         return new User("admin",password,authorities);
     }
 }

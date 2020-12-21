@@ -1,5 +1,7 @@
 package com.weiqs.learn.project.security.jwt;
 
+import com.weiqs.learn.project.security.common.ResultObject;
+import com.weiqs.learn.project.security.utils.ResponseUtil;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.web.access.AccessDeniedHandler;
 
@@ -19,6 +21,6 @@ public class JwtAccessDeniedHandler implements AccessDeniedHandler {
     @Override
     public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException) throws IOException {
         accessDeniedException = new AccessDeniedException("Sorry you don not enough permissions to access it!");
-        response.sendError(HttpServletResponse.SC_FORBIDDEN, accessDeniedException.getMessage());
+        ResponseUtil.responseJson(response,403,ResultObject.failed(null,"403",accessDeniedException.getMessage()));
     }
 }
